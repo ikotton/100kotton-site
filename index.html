@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Music Artist | 100% Kotton</title>
 <meta name="description" content="100% Kotton — deep house, psychedelic house and indie dance. 120 minutes of pure vibes, released and unreleased.">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Music Artist | 100% Kotton">
 <meta property="og:description" content="120 Minutes of Pure Vibes — released and unreleased tracks from 100% Kotton.">
-<meta property="og:image" content="/assets/hero.png">
+<meta property="og:image" content="/hero-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/hero-poster.jpg">
 
 <!-- ══ META PIXEL ══ -->
 <script>
@@ -50,7 +51,7 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
     font-family:var(--font);
     font-weight:300;
     color:var(--muted);
-    background:var(--paper);
+    background:#0B0512;
     line-height:1.6;
     overflow-x:hidden;
   }
@@ -58,151 +59,133 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
   img{max-width:100%;display:block}
 
   /* ════════════════════════════════════════
-     HERO BANNER — image + animated swirl
+     CINEMATIC VIDEO HERO
      ════════════════════════════════════════ */
   .hero{
     position:relative;
     width:100%;
-    aspect-ratio:1920/646;            /* exact ratio of the Duda banner artwork —
-                                         no max-height, or cover crops the baked-in
-                                         wordmark and logos off the bottom */
+    height:88svh;
+    min-height:420px;
+    max-height:1000px;
     background:#0B0512;
     overflow:hidden;
     isolation:isolate;
   }
 
-  /* base artwork */
-  .hero__art{
+  .hero__media{
     position:absolute;
     inset:0;
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center center;
+    object-position:center 42%;
     z-index:1;
-    animation:breathe 30s ease-in-out infinite alternate;
+    /* slow cinematic push-in, independent of the video's own motion */
+    animation:push 40s ease-in-out infinite alternate;
     will-change:transform;
   }
-  @keyframes breathe{
-    from{transform:scale(1)}
-    to{transform:scale(1.045)}
+  @keyframes push{
+    from{transform:scale(1.02)}
+    to{transform:scale(1.11)}
   }
 
-  /* swirling fog — sits over the paint, masked away from his face */
-  .hero__swirl{
-    position:absolute;
-    inset:-25%;
-    z-index:2;
-    pointer-events:none;
-    mix-blend-mode:screen;
-    opacity:.55;
-    background:
-      radial-gradient(30% 42% at 18% 40%, rgba(167,90,255,.85) 0%, transparent 60%),
-      radial-gradient(26% 38% at 82% 34%, rgba(126,60,220,.8) 0%, transparent 62%),
-      radial-gradient(34% 40% at 68% 76%, rgba(196,140,255,.62) 0%, transparent 64%),
-      radial-gradient(30% 36% at 28% 78%, rgba(96,40,180,.7) 0%, transparent 62%);
-    filter:blur(38px);
-    animation:swirl 34s linear infinite;
-    /* Clear his face AND the baked-in wordmark/logos along the bottom,
-       so the motion reads as paint swirling behind him. */
-    -webkit-mask-image:
-      radial-gradient(42% 68% at 50% 44%, transparent 0%, transparent 30%, #000 74%),
-      linear-gradient(to top, transparent 0%, transparent 26%, #000 56%);
-    -webkit-mask-composite:source-in;
-    mask-image:
-      radial-gradient(42% 68% at 50% 44%, transparent 0%, transparent 30%, #000 74%),
-      linear-gradient(to top, transparent 0%, transparent 26%, #000 56%);
-    mask-composite:intersect;
-    will-change:transform;
-  }
-  @keyframes swirl{
-    0%  {transform:rotate(0deg)   scale(1)}
-    50% {transform:rotate(180deg) scale(1.14)}
-    100%{transform:rotate(360deg) scale(1)}
+  /* film grain */
+  .hero__grain{
+    position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.11;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* second, slower counter-rotating layer for depth */
-  .hero__swirl--slow{
-    opacity:.38;
-    filter:blur(56px);
-    animation:swirlBack 52s linear infinite;
-    background:
-      radial-gradient(38% 46% at 62% 28%, rgba(214,170,255,.6) 0%, transparent 62%),
-      radial-gradient(32% 40% at 30% 62%, rgba(120,50,210,.7) 0%, transparent 64%);
-  }
-  @keyframes swirlBack{
-    0%  {transform:rotate(360deg) scale(1.08)}
-    100%{transform:rotate(0deg)   scale(1.08)}
-  }
-
-  /* drifting embers */
-  .hero__dust{
-    position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.5;
-    background-image:
-      radial-gradient(1.5px 1.5px at 12% 30%, rgba(255,255,255,.7) 50%, transparent 51%),
-      radial-gradient(1.5px 1.5px at 78% 22%, rgba(230,200,255,.6) 50%, transparent 51%),
-      radial-gradient(1px 1px   at 42% 68%, rgba(255,255,255,.55) 50%, transparent 51%),
-      radial-gradient(1.5px 1.5px at 88% 62%, rgba(220,180,255,.5) 50%, transparent 51%),
-      radial-gradient(1px 1px   at 26% 84%, rgba(255,255,255,.45) 50%, transparent 51%),
-      radial-gradient(1.5px 1.5px at 62% 46%, rgba(240,215,255,.5) 50%, transparent 51%);
-    animation:dust 26s ease-in-out infinite alternate;
-  }
-  @keyframes dust{
-    from{transform:translate3d(0,0,0)}
-    to{transform:translate3d(-1.5%,-3%,0)}
-  }
-
-  /* light vignette — the wordmark is baked into the artwork, so keep this subtle */
+  /* cinematic vignette + bottom fade into the page */
   .hero__veil{
-    position:absolute;inset:0;z-index:4;pointer-events:none;
-    background:linear-gradient(to top, rgba(8,4,14,.35) 0%, transparent 40%);
+    position:absolute;inset:0;z-index:3;pointer-events:none;
+    background:
+      radial-gradient(120% 88% at 50% 42%, transparent 38%, rgba(7,3,12,.62) 100%),
+      linear-gradient(to top, #0B0512 0%, rgba(11,5,18,.72) 12%, rgba(11,5,18,.1) 42%, transparent 66%);
   }
 
   .hero__inner{
     position:relative;
-    z-index:5;
+    z-index:4;
     height:100%;
     max-width:1600px;
     margin:0 auto;
-    padding:0 clamp(18px,3.4vw,64px) clamp(14px,2.6vw,44px);
+    padding:0 clamp(20px,4vw,72px) clamp(58px,7vw,104px);
     display:flex;
     align-items:flex-end;
     justify-content:space-between;
-    gap:24px;
+    gap:28px;
   }
 
   .wordmark{
     font-weight:800;
-    letter-spacing:-.035em;
-    font-size:clamp(28px,5.2vw,68px);
-    line-height:.95;
+    letter-spacing:-.038em;
+    font-size:clamp(38px,7.4vw,116px);
+    line-height:.9;
     color:#fff;
-    text-shadow:0 2px 30px rgba(0,0,0,.55);
+    text-shadow:0 4px 44px rgba(0,0,0,.7);
     white-space:nowrap;
+    opacity:0;
+    transform:translateY(26px);
+    animation:rise 1.5s cubic-bezier(.2,.7,.2,1) .35s forwards;
   }
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
 
   .platforms{
     display:flex;
     align-items:center;
-    gap:clamp(10px,1.5vw,22px);
+    gap:clamp(12px,1.7vw,26px);
     flex-shrink:0;
-    padding-bottom:6px;
+    padding-bottom:10px;
+    opacity:0;
+    animation:rise 1.5s cubic-bezier(.2,.7,.2,1) .62s forwards;
   }
   .platforms a{
-    color:rgba(255,255,255,.9);
+    color:rgba(255,255,255,.82);
     text-decoration:none;
     font-size:clamp(10px,1.05vw,13px);
     font-weight:600;
-    letter-spacing:.1em;
+    letter-spacing:.13em;
     text-transform:uppercase;
     white-space:nowrap;
-    text-shadow:0 1px 12px rgba(0,0,0,.7);
-    transition:color .15s ease;
+    text-shadow:0 2px 16px rgba(0,0,0,.8);
+    transition:color .18s ease;
   }
   .platforms a:hover{color:#fff}
 
+  /* scroll cue */
+  .cue{
+    position:absolute;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%);
+    z-index:5;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    color:rgba(255,255,255,.5);
+    font-size:9.5px;
+    font-weight:600;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    text-decoration:none;
+    opacity:0;
+    animation:rise 1.6s ease 1.25s forwards;
+    transition:color .2s ease;
+  }
+  .cue:hover{color:rgba(255,255,255,.9)}
+  .cue__line{
+    width:1px;height:34px;
+    background:linear-gradient(to bottom, rgba(255,255,255,.6), transparent);
+    animation:drop 2.4s ease-in-out infinite;
+  }
+  @keyframes drop{
+    0%,100%{transform:scaleY(.55);transform-origin:top;opacity:.45}
+    50%    {transform:scaleY(1);transform-origin:top;opacity:1}
+  }
+
   /* ════════════════════════════════════════
-     DARK BAND — video + copy
+     BANDS
      ════════════════════════════════════════ */
   .band-dark{background:var(--ink);color:#EDEDF0}
   .band-plum{background:var(--plum)}
@@ -211,7 +194,7 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
   .wrap{
     max-width:1180px;
     margin:0 auto;
-    padding:clamp(46px,6vw,84px) 24px;
+    padding:clamp(56px,7vw,104px) 24px;
   }
 
   .split{
@@ -226,49 +209,26 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
     width:100%;
     aspect-ratio:16/9;
     background:#000;
-    border-radius:2px;
+    border-radius:3px;
     overflow:hidden;
+    box-shadow:0 18px 50px rgba(0,0,0,.42);
   }
   .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
   .pitch{text-align:center;padding:0 clamp(0px,2vw,28px)}
-
-  .pitch__icon{
-    width:26px;height:26px;
-    margin:0 auto 20px;
-    color:#fff;
-  }
-  .pitch__rule{
-    width:44px;height:1px;
-    background:rgba(255,255,255,.45);
-    margin:0 auto 22px;
-  }
-  .pitch__title{
-    font-size:16px;
-    font-weight:700;
-    color:#fff;
-    margin-bottom:14px;
-    letter-spacing:.005em;
-  }
+  .pitch__icon{width:26px;height:26px;margin:0 auto 20px;color:#fff}
+  .pitch__rule{width:44px;height:1px;background:rgba(255,255,255,.45);margin:0 auto 22px}
+  .pitch__title{font-size:16px;font-weight:700;color:#fff;margin-bottom:14px}
   .pitch__body{
-    font-size:15.5px;
-    font-weight:300;
-    line-height:1.72;
-    color:#C9C9D2;
-    max-width:330px;
-    margin:0 auto;
+    font-size:15.5px;font-weight:300;line-height:1.72;
+    color:#C9C9D2;max-width:330px;margin:0 auto;
   }
 
-  /* ════════════════════════════════════════
-     PLUM BAND — Spotify
-     ════════════════════════════════════════ */
-  .band-plum .wrap{padding:clamp(34px,4.2vw,56px) 24px}
+  .band-plum .wrap{padding:clamp(38px,4.6vw,60px) 24px}
   .spotify{
-    max-width:740px;
-    margin:0 auto;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 14px 44px rgba(0,0,0,.34);
+    max-width:740px;margin:0 auto;
+    border-radius:12px;overflow:hidden;
+    box-shadow:0 16px 48px rgba(0,0,0,.4);
   }
   .spotify iframe{display:block;width:100%;height:352px;border:0}
 
@@ -277,38 +237,23 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
      ════════════════════════════════════════ */
   .contact{text-align:center}
   .contact h2{
-    font-family:var(--font);
     font-size:clamp(24px,3vw,30px);
-    font-weight:700;
-    color:var(--ink);
-    letter-spacing:-.01em;
-    margin-bottom:14px;
+    font-weight:700;color:var(--ink);
+    letter-spacing:-.01em;margin-bottom:14px;
   }
   .contact__sub{
-    font-size:16px;
-    font-weight:300;
-    color:var(--muted);
-    max-width:430px;
-    margin:0 auto 34px;
-    line-height:1.6;
+    font-size:16px;font-weight:300;color:var(--muted);
+    max-width:430px;margin:0 auto 34px;line-height:1.6;
   }
 
   form{max-width:420px;margin:0 auto;text-align:left}
-
   .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 
   input,textarea{
-    width:100%;
-    font-family:var(--font);
-    font-size:16px;
-    font-weight:300;
-    color:#000;
-    background:transparent;
-    border:1px solid var(--ink);
-    border-radius:0;
-    padding:11px 13px;
-    outline:none;
-    transition:box-shadow .15s ease;
+    width:100%;font-family:var(--font);
+    font-size:16px;font-weight:300;color:#000;
+    background:transparent;border:1px solid var(--ink);border-radius:0;
+    padding:11px 13px;outline:none;transition:box-shadow .15s ease;
   }
   input::placeholder,textarea::placeholder{color:#6B6C73;opacity:1}
   input:focus,textarea:focus{box-shadow:0 0 0 2px rgba(62,27,91,.28)}
@@ -316,29 +261,16 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
   textarea::placeholder{font-style:italic}
 
   .send{
-    display:block;
-    margin:0 auto;
-    min-width:172px;
-    background:var(--ink);
-    color:#fff;
-    font-family:var(--font);
-    font-size:15px;
-    font-weight:400;
-    border:0;
-    border-radius:5px;
-    padding:13px 30px;
-    cursor:pointer;
+    display:block;margin:0 auto;min-width:172px;
+    background:var(--ink);color:#fff;font-family:var(--font);
+    font-size:15px;font-weight:400;border:0;border-radius:5px;
+    padding:13px 30px;cursor:pointer;
     transition:opacity .15s ease,transform .15s ease;
   }
   .send:hover{opacity:.88}
   .send:active{transform:translateY(1px)}
 
-  .form-note{
-    text-align:center;
-    font-size:14px;
-    margin-top:16px;
-    min-height:20px;
-  }
+  .form-note{text-align:center;font-size:14px;margin-top:16px;min-height:20px}
   .form-note.ok{color:#1B7F4B}
   .form-note.err{color:#B3261E}
 
@@ -346,22 +278,23 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
      FOOTER
      ════════════════════════════════════════ */
   footer{background:var(--ink);color:#B9B9C2}
-  .foot{
-    max-width:1180px;
-    margin:0 auto;
-    padding:44px 24px 52px;
-    font-size:13.5px;
-    font-weight:300;
-  }
+  .foot{max-width:1180px;margin:0 auto;padding:44px 24px 52px;font-size:13.5px;font-weight:300}
   .foot a{color:#B9B9C2;text-decoration:none}
   .foot a:hover{color:#fff}
   .foot__line{margin-bottom:18px}
   .foot__social{display:flex;gap:16px;align-items:center}
-  .foot__social a{
-    display:inline-flex;width:20px;height:20px;
-    transition:color .15s ease;
-  }
+  .foot__social a{display:inline-flex;width:20px;height:20px;transition:color .15s ease}
   .foot__social svg{width:100%;height:100%;fill:currentColor}
+
+  /* ════════════════════════════════════════
+     SCROLL REVEAL
+     ════════════════════════════════════════ */
+  .reveal{
+    opacity:0;
+    transform:translateY(34px);
+    transition:opacity .95s cubic-bezier(.2,.7,.2,1), transform .95s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.in{opacity:1;transform:none}
 
   /* ════════════════════════════════════════
      RESPONSIVE
@@ -373,40 +306,60 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
     .spotify iframe{height:400px}
   }
   @media (max-width:560px){
-    .hero{height:clamp(200px,52vw,260px)}
-    .hero__inner{flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:10px;padding-bottom:18px}
-    .platforms{gap:14px}
-    .platforms a{font-size:10px;letter-spacing:.08em}
+    .hero{height:76svh;min-height:380px}
+    .hero__inner{
+      flex-direction:column;align-items:flex-start;justify-content:flex-end;
+      gap:14px;padding-bottom:70px;
+    }
+    .platforms{gap:15px;padding-bottom:0}
+    .platforms a{font-size:10px;letter-spacing:.09em}
     .row{grid-template-columns:1fr}
   }
 
   @media (prefers-reduced-motion:reduce){
-    .hero__art,.hero__swirl,.hero__dust{animation:none}
     html{scroll-behavior:auto}
+    .hero__media{animation:none}
+    .cue__line{animation:none}
+    .wordmark,.platforms,.cue{opacity:1;transform:none;animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
   }
 </style>
 </head>
 <body>
 
-<!-- ═══════════ HERO ═══════════ -->
+<!-- ═══════════ CINEMATIC HERO ═══════════ -->
 <header class="hero">
-  <!-- TEMP: pulling from Duda's CDN so you can preview immediately.
-       Swap to /assets/hero.png BEFORE cancelling Duda or this breaks. -->
-  <img class="hero__art" src="https://lirp.cdn-website.com/bcea8a2a/dms3rep/multi/opt/Change+Image+to+White+Color+%281%29-1920w.png" alt="100% Kotton" fetchpriority="high">
-  <div class="hero__swirl"></div>
-  <div class="hero__swirl hero__swirl--slow"></div>
-  <div class="hero__dust"></div>
+  <video class="hero__media"
+         autoplay muted loop playsinline preload="auto"
+         poster="/hero-poster.jpg"
+         aria-label="100% Kotton">
+    <source src="/hero.webm" type="video/webm">
+    <source src="/hero.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero__grain"></div>
   <div class="hero__veil"></div>
 
-  <!-- The wordmark and streaming logos are baked into the banner artwork,
-       exactly as they were on Duda. -->
+  <div class="hero__inner">
+    <div class="wordmark">100% Kotton</div>
+    <nav class="platforms">
+      <a href="https://open.spotify.com/playlist/6GljsW4eTWdrnGVJcqk3zu" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://music.apple.com/search?term=100%25%20Kotton" target="_blank" rel="noopener">Apple Music</a>
+      <a href="https://music.amazon.com/search/100%25+Kotton" target="_blank" rel="noopener">Amazon</a>
+      <a href="https://www.youtube.com/@100kotton" target="_blank" rel="noopener">YouTube</a>
+    </nav>
+  </div>
 
+  <a class="cue" href="#listen" aria-label="Scroll to music">
+    <span>Listen</span>
+    <span class="cue__line"></span>
+  </a>
 </header>
 
 <!-- ═══════════ VIDEO + PITCH ═══════════ -->
-<section class="band-dark">
+<section class="band-dark" id="listen">
   <div class="wrap split">
-    <div class="video">
+    <div class="video reveal">
       <iframe
         src="https://www.youtube.com/embed/lIiszEDZ6KE"
         title="Deep Vocal House Mix – Dreamy Emotional House"
@@ -415,7 +368,7 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
         loading="lazy"></iframe>
     </div>
 
-    <div class="pitch">
+    <div class="pitch reveal">
       <svg class="pitch__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
         <circle cx="12" cy="12" r="10"/>
         <path d="M10 8.5l6 3.5-6 3.5z" fill="currentColor" stroke="none"/>
@@ -430,7 +383,7 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
 <!-- ═══════════ SPOTIFY ═══════════ -->
 <section class="band-plum">
   <div class="wrap">
-    <div class="spotify">
+    <div class="spotify reveal">
       <iframe
         src="https://open.spotify.com/embed/album/3k49OhzjS6VtbwUMvF8fy1?utm_source=generator&theme=0"
         title="100% Kotton on Spotify"
@@ -442,11 +395,11 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
 
 <!-- ═══════════ CONTACT ═══════════ -->
 <section class="band-light">
-  <div class="wrap contact">
+  <div class="wrap contact reveal">
     <h2>Contact Us</h2>
     <p class="contact__sub">Send a message using the form below we'll get back to you as soon as we can.</p>
 
-    <!-- ⚠️ Replace FORM_ID with your Formspree endpoint (see README) -->
+    <!-- ⚠️ Replace FORM_ID with your Formspree endpoint -->
     <form id="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
       <div class="row">
         <input type="text"  name="name"  placeholder="Name"  autocomplete="name"  required>
@@ -479,14 +432,59 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
 </footer>
 
 <script>
-  // Async contact submit so people stay on the page.
+  // ── Scroll reveal ──────────────────────────────────────────
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (e) { e.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+
+  // ── Hero parallax — video drifts slower than the page ──────
+  (function () {
+    var media = document.querySelector('.hero__media');
+    var hero = document.querySelector('.hero');
+    if (!media || !hero) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var ticking = false;
+    function frame() {
+      var y = window.scrollY;
+      var h = hero.offsetHeight;
+      if (y < h) media.style.translate = '0 ' + (y * 0.28) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(frame); }
+    }, { passive: true });
+  })();
+
+  // ── Safari/iOS occasionally blocks autoplay — nudge it ─────
+  (function () {
+    var v = document.querySelector('.hero__media');
+    if (!v) return;
+    var kick = function () { var p = v.play(); if (p && p.catch) p.catch(function(){}); };
+    v.addEventListener('canplay', kick, { once: true });
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) kick();
+    });
+  })();
+
+  // ── Async contact submit ───────────────────────────────────
   (function () {
     var form = document.getElementById('contact-form');
     var note = document.getElementById('form-note');
     if (!form) return;
 
     form.addEventListener('submit', function (e) {
-      if (form.action.indexOf('FORM_ID') > -1) return; // not configured yet — let it post normally
+      if (form.action.indexOf('FORM_ID') > -1) return;
       e.preventDefault();
 
       var btn = form.querySelector('.send');
@@ -500,14 +498,11 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
         body: new FormData(form),
         headers: { Accept: 'application/json' }
       }).then(function (r) {
-        if (r.ok) {
-          form.reset();
-          note.className = 'form-note ok';
-          note.textContent = 'Thanks — message sent. I’ll get back to you soon.';
-          if (typeof fbq === 'function') fbq('track', 'Lead');
-        } else {
-          throw new Error('bad response');
-        }
+        if (!r.ok) throw new Error('bad response');
+        form.reset();
+        note.className = 'form-note ok';
+        note.textContent = 'Thanks — message sent. I’ll get back to you soon.';
+        if (typeof fbq === 'function') fbq('track', 'Lead');
       }).catch(function () {
         note.className = 'form-note err';
         note.textContent = 'Something went wrong. Email kotton@kotton.io instead.';
