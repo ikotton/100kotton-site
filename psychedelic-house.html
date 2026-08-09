@@ -51,6 +51,16 @@
 }
 </script>
 
+<!-- ══ GOOGLE ANALYTICS 4 ══ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-797SH9LJ6Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-797SH9LJ6Z');
+</script>
+<!-- ══ END GOOGLE ANALYTICS 4 ══ -->
+
 <!-- ══ META PIXEL ══ -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -222,6 +232,13 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
         fbq('trackCustom', 'SpotifyClick', {
           playlist: 'Psychedelic House',
           playlist_id: '6GljsW4eTWdrnGVJcqk3zu'
+        });
+      }
+      if (typeof gtag === 'function') {
+        gtag('event', 'spotify_click', {
+          playlist: 'Psychedelic House',
+          playlist_id: '6GljsW4eTWdrnGVJcqk3zu',
+          source_page: 'psychedelic-house'
         });
       }
     }, { passive: true });

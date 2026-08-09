@@ -236,6 +236,16 @@
 }
 </script>
 
+<!-- ══ GOOGLE ANALYTICS 4 ══ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-797SH9LJ6Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-797SH9LJ6Z');
+</script>
+<!-- ══ END GOOGLE ANALYTICS 4 ══ -->
+
 <!-- ══ META PIXEL ══ -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -1061,6 +1071,7 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
         note.className = 'form-note ok';
         note.textContent = 'Thanks, message sent. I’ll get back to you soon.';
         if (typeof fbq === 'function') fbq('track', 'Lead');
+        if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'contact' });
       }).catch(function () {
         note.className = 'form-note err';
         note.textContent = 'Something went wrong. Email kotton@kotton.io instead.';
