@@ -107,9 +107,10 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
     position:relative;
     z-index:4;
     height:100%;
-    max-width:1600px;
-    margin:0 auto;
-    padding:0 clamp(20px,4vw,72px) clamp(58px,7vw,104px);
+    width:100%;
+    /* no max-width — Spotify artist pages sit the name hard against the
+       left edge rather than centring it in a content column */
+    padding:0 clamp(20px,3.4vw,88px) clamp(58px,7vw,104px);
     display:flex;
     align-items:flex-end;
     justify-content:space-between;
@@ -233,46 +234,142 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
   .spotify iframe{display:block;width:100%;height:352px;border:0}
 
   /* ════════════════════════════════════════
-     CONTACT
+     CONTACT — dark, glass, aurora
      ════════════════════════════════════════ */
+  .band-contact{
+    position:relative;
+    background:#0B0512;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .band-contact::before{
+    content:'';
+    position:absolute;inset:-30%;z-index:0;
+    background:
+      radial-gradient(34% 44% at 22% 26%, rgba(123,47,247,.5) 0%, transparent 62%),
+      radial-gradient(30% 38% at 78% 30%, rgba(167,90,255,.42) 0%, transparent 64%),
+      radial-gradient(36% 42% at 64% 78%, rgba(92,40,180,.5) 0%, transparent 64%);
+    filter:blur(70px);
+    animation:aurora 46s linear infinite;
+    will-change:transform;
+  }
+  @keyframes aurora{
+    0%  {transform:rotate(0deg) scale(1)}
+    50% {transform:rotate(180deg) scale(1.14)}
+    100%{transform:rotate(360deg) scale(1)}
+  }
+  .band-contact > .wrap{position:relative;z-index:1}
+
   .contact{text-align:center}
+
+  .contact__eyebrow{
+    font-size:10.5px;font-weight:600;
+    letter-spacing:.3em;text-transform:uppercase;
+    color:rgba(200,178,240,.72);
+    margin-bottom:16px;
+  }
   .contact h2{
-    font-size:clamp(24px,3vw,30px);
-    font-weight:700;color:var(--ink);
-    letter-spacing:-.01em;margin-bottom:14px;
+    font-size:clamp(30px,4.4vw,48px);
+    font-weight:800;color:#fff;
+    letter-spacing:-.03em;line-height:1.04;
+    margin-bottom:16px;
+  }
+  .contact h2 em{
+    font-style:normal;
+    background:linear-gradient(100deg,#C9A6FF 0%,#7B2FF7 52%,#E7D4FF 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
   }
   .contact__sub{
-    font-size:16px;font-weight:300;color:var(--muted);
-    max-width:430px;margin:0 auto 34px;line-height:1.6;
+    font-size:16px;font-weight:300;color:#A796C4;
+    max-width:440px;margin:0 auto 40px;line-height:1.65;
   }
 
-  form{max-width:420px;margin:0 auto;text-align:left}
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+  .card{
+    max-width:520px;margin:0 auto;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:20px;
+    padding:clamp(26px,3.6vw,44px);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    box-shadow:0 26px 70px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.07);
+    text-align:left;
+  }
 
-  input,textarea{
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+
+  .field{position:relative}
+
+  .field input,
+  .field textarea{
     width:100%;font-family:var(--font);
-    font-size:16px;font-weight:300;color:#000;
-    background:transparent;border:1px solid var(--ink);border-radius:0;
-    padding:11px 13px;outline:none;transition:box-shadow .15s ease;
+    font-size:15.5px;font-weight:300;color:#F2ECFB;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.11);
+    border-radius:11px;
+    padding:21px 15px 9px;
+    outline:none;
+    transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
   }
-  input::placeholder,textarea::placeholder{color:#6B6C73;opacity:1}
-  input:focus,textarea:focus{box-shadow:0 0 0 2px rgba(62,27,91,.28)}
-  textarea{min-height:96px;resize:vertical;font-style:italic;margin-bottom:20px}
-  textarea::placeholder{font-style:italic}
+  .field textarea{min-height:112px;resize:vertical;padding-top:24px}
+
+  /* floating label */
+  .field label{
+    position:absolute;
+    left:16px;top:15px;
+    font-size:15px;font-weight:300;
+    color:#8E7FAC;
+    pointer-events:none;
+    transform-origin:left top;
+    transition:transform .18s ease, color .18s ease;
+  }
+  .field input:focus + label,
+  .field textarea:focus + label,
+  .field input:not(:placeholder-shown) + label,
+  .field textarea:not(:placeholder-shown) + label{
+    transform:translateY(-9px) scale(.72);
+    color:#C9A6FF;
+  }
+
+  .field input:focus,
+  .field textarea:focus{
+    background:rgba(255,255,255,.06);
+    border-color:rgba(160,105,255,.62);
+    box-shadow:0 0 0 4px rgba(123,47,247,.16);
+  }
 
   .send{
-    display:block;margin:0 auto;min-width:172px;
-    background:var(--ink);color:#fff;font-family:var(--font);
-    font-size:15px;font-weight:400;border:0;border-radius:5px;
-    padding:13px 30px;cursor:pointer;
-    transition:opacity .15s ease,transform .15s ease;
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    width:100%;margin-top:22px;
+    background:linear-gradient(100deg,#7B2FF7 0%,#A75AFF 100%);
+    color:#fff;font-family:var(--font);
+    font-size:15.5px;font-weight:600;letter-spacing:.01em;
+    border:0;border-radius:999px;
+    padding:16px 30px;cursor:pointer;
+    box-shadow:0 12px 34px rgba(123,47,247,.4);
+    transition:transform .16s ease, box-shadow .16s ease, filter .16s ease;
   }
-  .send:hover{opacity:.88}
-  .send:active{transform:translateY(1px)}
+  .send:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(123,47,247,.54);filter:brightness(1.07)}
+  .send:active{transform:translateY(0) scale(.99)}
+  .send:disabled{opacity:.6;cursor:default;transform:none}
+  .send svg{width:17px;height:17px;transition:transform .16s ease}
+  .send:hover svg{transform:translateX(3px)}
 
   .form-note{text-align:center;font-size:14px;margin-top:16px;min-height:20px}
-  .form-note.ok{color:#1B7F4B}
-  .form-note.err{color:#B3261E}
+  .form-note.ok{color:#7BE8A8}
+  .form-note.err{color:#FF8F8F}
+
+  .contact__alt{
+    margin-top:26px;
+    font-size:13.5px;font-weight:300;
+    color:#8E7FAC;
+  }
+  .contact__alt a{
+    color:#C9A6FF;text-decoration:none;
+    border-bottom:1px solid rgba(201,166,255,.3);padding-bottom:1px;
+  }
+  .contact__alt a:hover{color:#fff;border-color:rgba(255,255,255,.5)}
 
   /* ════════════════════════════════════════
      FOOTER
@@ -313,13 +410,15 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
     }
     .platforms{gap:15px;padding-bottom:0}
     .platforms a{font-size:10px;letter-spacing:.09em}
-    .row{grid-template-columns:1fr}
+    .row{grid-template-columns:1fr;gap:14px}
+    .card{padding:24px 20px;border-radius:16px}
   }
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .hero__media{animation:none}
     .cue__line{animation:none}
+    .band-contact::before{animation:none}
     .wordmark,.platforms,.cue{opacity:1;transform:none;animation:none}
     .reveal{opacity:1;transform:none;transition:none}
   }
@@ -394,22 +493,47 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
 </section>
 
 <!-- ═══════════ CONTACT ═══════════ -->
-<section class="band-light">
+<section class="band-contact">
   <div class="wrap contact reveal">
-    <h2>Contact Us</h2>
-    <p class="contact__sub">Send a message using the form below we'll get back to you as soon as we can.</p>
+    <p class="contact__eyebrow">Get in touch</p>
+    <h2>Bookings, remixes<br>&amp; <em>everything else</em></h2>
+    <p class="contact__sub">Send a message and I'll get back to you as soon as I can.</p>
 
-    <!-- ⚠️ Replace FORM_ID with your Formspree endpoint -->
-    <form id="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
-      <div class="row">
-        <input type="text"  name="name"  placeholder="Name"  autocomplete="name"  required>
-        <input type="tel"   name="phone" placeholder="Phone" autocomplete="tel">
-      </div>
-      <input type="email" name="email" placeholder="Email" autocomplete="email" required style="margin-bottom:12px">
-      <textarea name="message" placeholder="Message" required></textarea>
-      <button class="send" type="submit">Send</button>
-      <p class="form-note" id="form-note" role="status" aria-live="polite"></p>
-    </form>
+    <div class="card">
+      <!-- ⚠️ Replace FORM_ID with your Formspree endpoint -->
+      <form id="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
+        <div class="row">
+          <div class="field">
+            <input type="text" id="f-name" name="name" placeholder=" " autocomplete="name" required>
+            <label for="f-name">Name</label>
+          </div>
+          <div class="field">
+            <input type="tel" id="f-phone" name="phone" placeholder=" " autocomplete="tel">
+            <label for="f-phone">Phone</label>
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom:14px">
+          <input type="email" id="f-email" name="email" placeholder=" " autocomplete="email" required>
+          <label for="f-email">Email</label>
+        </div>
+
+        <div class="field">
+          <textarea id="f-msg" name="message" placeholder=" " required></textarea>
+          <label for="f-msg">Message</label>
+        </div>
+
+        <button class="send" type="submit">
+          Send message
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </button>
+        <p class="form-note" id="form-note" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <p class="contact__alt">Or email <a href="mailto:kotton@kotton.io">kotton@kotton.io</a></p>
   </div>
 </section>
 
@@ -488,6 +612,7 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
       e.preventDefault();
 
       var btn = form.querySelector('.send');
+      var btnHTML = btn.innerHTML;
       btn.disabled = true;
       btn.textContent = 'Sending…';
       note.className = 'form-note';
@@ -508,7 +633,7 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
         note.textContent = 'Something went wrong. Email kotton@kotton.io instead.';
       }).then(function () {
         btn.disabled = false;
-        btn.textContent = 'Send';
+        btn.innerHTML = btnHTML;
       });
     });
   })();
