@@ -225,12 +225,57 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
   .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
   .pitch{text-align:center;padding:0 clamp(0px,2vw,28px)}
-  .pitch__icon{width:26px;height:26px;margin:0 auto 20px;color:#fff}
-  .pitch__rule{width:44px;height:1px;background:rgba(255,255,255,.45);margin:0 auto 22px}
-  .pitch__title{font-size:16px;font-weight:700;color:#fff;margin-bottom:14px}
+
+  .pitch__badge{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:6px 13px 6px 11px;
+    border-radius:999px;
+    background:rgba(167,90,255,.13);
+    border:1px solid rgba(167,90,255,.36);
+    color:#C9A6FF;
+    font-size:10px;font-weight:700;
+    letter-spacing:.19em;text-transform:uppercase;
+    margin-bottom:20px;
+  }
+  .pitch__dot{
+    width:6px;height:6px;border-radius:50%;
+    background:#A75AFF;
+    box-shadow:0 0 0 0 rgba(167,90,255,.7);
+    animation:pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%  {box-shadow:0 0 0 0 rgba(167,90,255,.6)}
+    70% {box-shadow:0 0 0 9px rgba(167,90,255,0)}
+    100%{box-shadow:0 0 0 0 rgba(167,90,255,0)}
+  }
+
+  .pitch__title{
+    font-size:clamp(21px,2.3vw,28px);
+    font-weight:700;color:#fff;
+    letter-spacing:-.02em;line-height:1.18;
+    margin-bottom:8px;
+  }
+  .pitch__sub{
+    font-size:13px;font-weight:400;
+    color:#8E8AA0;letter-spacing:.02em;
+    margin-bottom:18px;
+  }
+  .pitch__rule{width:44px;height:1px;background:rgba(255,255,255,.28);margin:0 auto 18px}
   .pitch__body{
     font-size:15.5px;font-weight:300;line-height:1.72;
-    color:#C9C9D2;max-width:330px;margin:0 auto;
+    color:#C9C9D2;max-width:352px;margin:0 auto;
+  }
+  .pitch__where{
+    display:flex;align-items:center;justify-content:center;
+    gap:10px;margin-top:20px;
+    font-size:11px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;
+    color:#8E8AA0;
+  }
+  .pitch__where span{color:#C9A6FF}
+  .pitch__where i{
+    width:3px;height:3px;border-radius:50%;
+    background:rgba(255,255,255,.28);display:inline-block;
   }
 
   .band-plum .wrap{padding:clamp(38px,4.6vw,60px) 24px}
@@ -497,21 +542,20 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
   <div class="wrap split">
     <div class="video reveal">
       <iframe
-        src="https://www.youtube.com/embed/lIiszEDZ6KE"
-        title="Deep Vocal House Mix – Dreamy Emotional House"
+        src="https://www.youtube.com/embed/apH6kpL_o-I"
+        title="Floating Above the Pain (Pain Remix) — 100% Kotton"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
         loading="lazy"></iframe>
     </div>
 
     <div class="pitch reveal">
-      <svg class="pitch__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M10 8.5l6 3.5-6 3.5z" fill="currentColor" stroke="none"/>
-      </svg>
+      <span class="pitch__badge"><i class="pitch__dot"></i>Unreleased</span>
+      <h2 class="pitch__title">Floating Above the Pain<br>(Pain Remix)</h2>
+      <p class="pitch__sub">A remix of track 9 from <em>PURE</em></p>
       <div class="pitch__rule"></div>
-      <h2 class="pitch__title">120 Minutes of Pure Vibes</h2>
-      <p class="pitch__body">Press play and get lost in 2 hours of my own tracks — both released and unreleased. Perfect for your home, your TV, the gym, or anywhere you want the music to take over. Turn it up and get fully immersed.</p>
+      <p class="pitch__body">This one never made it to streaming — you won't find it on Spotify or Apple Music. It lives in exactly three places, and you're standing in one of them.</p>
+      <p class="pitch__where"><span>SoundCloud</span><i></i><span>YouTube</span><i></i><span>Here</span></p>
     </div>
   </div>
 </section>
