@@ -63,7 +63,8 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
   .hero{
     position:relative;
     width:100%;
-    height:clamp(220px,29vw,440px);   /* wide, short — Spotify artist header proportions */
+    aspect-ratio:1920/646;            /* exact ratio of the Duda banner artwork */
+    max-height:520px;
     background:#0B0512;
     overflow:hidden;
     isolation:isolate;
@@ -76,7 +77,7 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center 46%;
+    object-position:center center;
     z-index:1;
     animation:breathe 30s ease-in-out infinite alternate;
     will-change:transform;
@@ -101,9 +102,16 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
       radial-gradient(30% 36% at 28% 78%, rgba(96,40,180,.7) 0%, transparent 62%);
     filter:blur(38px);
     animation:swirl 34s linear infinite;
-    /* keep the centre (his face) clear so the motion reads as *behind* him */
-    -webkit-mask-image:radial-gradient(46% 62% at 50% 46%, transparent 0%, transparent 34%, #000 76%);
-            mask-image:radial-gradient(46% 62% at 50% 46%, transparent 0%, transparent 34%, #000 76%);
+    /* Clear his face AND the baked-in wordmark/logos along the bottom,
+       so the motion reads as paint swirling behind him. */
+    -webkit-mask-image:
+      radial-gradient(42% 68% at 50% 44%, transparent 0%, transparent 30%, #000 74%),
+      linear-gradient(to top, transparent 0%, transparent 26%, #000 56%);
+    -webkit-mask-composite:source-in;
+    mask-image:
+      radial-gradient(42% 68% at 50% 44%, transparent 0%, transparent 30%, #000 74%),
+      linear-gradient(to top, transparent 0%, transparent 26%, #000 56%);
+    mask-composite:intersect;
     will-change:transform;
   }
   @keyframes swirl{
@@ -143,10 +151,10 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
     to{transform:translate3d(-1.5%,-3%,0)}
   }
 
-  /* vignette so the wordmark always has contrast */
+  /* light vignette — the wordmark is baked into the artwork, so keep this subtle */
   .hero__veil{
     position:absolute;inset:0;z-index:4;pointer-events:none;
-    background:linear-gradient(to top, rgba(8,4,14,.82) 0%, rgba(8,4,14,.18) 34%, transparent 62%);
+    background:linear-gradient(to top, rgba(8,4,14,.35) 0%, transparent 40%);
   }
 
   .hero__inner{
@@ -383,21 +391,15 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
 <header class="hero">
   <!-- TEMP: pulling from Duda's CDN so you can preview immediately.
        Swap to /assets/hero.png BEFORE cancelling Duda or this breaks. -->
-  <img class="hero__art" src="https://irp.cdn-website.com/bcea8a2a/dms3rep/multi/opt/CleanShot+2026-06-27+at+20.09.39-2x-1920w.png" alt="100% Kotton" fetchpriority="high">
+  <img class="hero__art" src="https://lirp.cdn-website.com/bcea8a2a/dms3rep/multi/opt/Change+Image+to+White+Color+%281%29-1920w.png" alt="100% Kotton" fetchpriority="high">
   <div class="hero__swirl"></div>
   <div class="hero__swirl hero__swirl--slow"></div>
   <div class="hero__dust"></div>
   <div class="hero__veil"></div>
 
-  <div class="hero__inner">
-    <div class="wordmark">100% Kotton</div>
-    <nav class="platforms">
-      <a href="https://open.spotify.com/playlist/6GljsW4eTWdrnGVJcqk3zu" target="_blank" rel="noopener">Spotify</a>
-      <a href="https://music.apple.com/search?term=100%25%20Kotton" target="_blank" rel="noopener">Apple Music</a>
-      <a href="https://music.amazon.com/search/100%25+Kotton" target="_blank" rel="noopener">Amazon</a>
-      <a href="https://www.youtube.com/@100kotton" target="_blank" rel="noopener">YouTube</a>
-    </nav>
-  </div>
+  <!-- The wordmark and streaming logos are baked into the banner artwork,
+       exactly as they were on Duda. -->
+
 </header>
 
 <!-- ═══════════ VIDEO + PITCH ═══════════ -->
