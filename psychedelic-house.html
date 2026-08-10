@@ -14,12 +14,13 @@
 <meta property="og:type" content="music.playlist">
 <meta property="og:title" content="Psychedelic House ~ Trippy Dance Music, Groovy House">
 <meta property="og:description" content="Trippy synths and hypnotic grooves for melting into the dancefloor.">
-<meta property="og:image" content="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da848b4aae461637dc0e09f0d0f8">
+<meta property="og:image" content="https://www.100kotton.com/playlist-cover.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1000">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://image-cdn-fa.spotifycdn.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
@@ -34,7 +35,7 @@
       "numTracks": 40,
       "url": "https://open.spotify.com/playlist/6GljsW4eTWdrnGVJcqk3zu",
       "sameAs": "https://open.spotify.com/playlist/6GljsW4eTWdrnGVJcqk3zu",
-      "image": "https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da848b4aae461637dc0e09f0d0f8",
+      "image": "https://www.100kotton.com/playlist-cover.jpg",
       "genre": ["Psychedelic House", "Deep House", "Indie Dance"],
       "creator": { "@id": "https://www.100kotton.com/#artist" }
     },
@@ -197,10 +198,14 @@ src="https://www.facebook.com/tr?id=1527371022121064&ev=PageView&noscript=1"/></
 <div class="grain"></div>
 
 <main>
-  <img class="art"
-       src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da848b4aae461637dc0e09f0d0f8"
-       alt="Psychedelic House playlist cover"
-       width="268" height="268">
+  <picture>
+    <source srcset="/playlist-cover.webp" type="image/webp">
+    <img class="art"
+         src="/playlist-cover.jpg"
+         alt="Psychedelic House playlist cover"
+         width="268" height="268"
+         fetchpriority="high" decoding="async">
+  </picture>
 
   <p class="eyebrow">Playlist</p>
   <h1>Psychedelic House</h1>
